@@ -1,7 +1,5 @@
 from PIL import Image
 
-# "python.defaultInterpreterPath": "C:\\Users\\Babban Gona\\Anaconda3\\python.exe",
-
 def read_image(img_path):
     """Read in image and handle error if image is unreadable.
     """
