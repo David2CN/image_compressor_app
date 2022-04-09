@@ -46,6 +46,3 @@ def upload_file():
                                    compressed_rate=compressed_rate)
 
     return render_template("base.html")
-
-
-app.run()
