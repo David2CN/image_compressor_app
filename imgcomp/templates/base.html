@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}Image Compressor</title>
+    <meta charset="utf-8" />
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<section class="headerSection">
+<h1>Image Compressor</h1>
+</section>
+
+<section class="myArticle">
+  Compress images without losing the details: JPG, PNG, GIF, BMP, TIFF, etc.
+  
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="file" class="myClass" accept="image/*">
+      <input type="submit" value="Upload Image" class="myButton">
+    </form>
+
+</section>
+
+
+<section class="mySection">
+    {% block content %} {% endblock %}
+</section>
+
+</body>
+
+<footer> &copy David CN 2022 </footer>
+</html>

@@ -1,0 +1,66 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    align-items: center;
+    color: white;
+    background-color: blue;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+
+h1 {
+    color: blue;
+    font-weight: 500%;
+}
+   
+
+.headerSection {
+    font-size: medium;
+    color: blue;
+    background-color: white;
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    width: 100%;
+    display: inline-block;
+}
+  
+
+.myClass, .myButton{
+    font-size: 1em;
+    color: white;
+    background-color: blue;
+    border-radius: 10px;
+    border-color: white;
+    display: inline-block;
+    margin-bottom: 1%;
+    margin-top: 1%;
+   }
+
+
+.myButton:focus, .myButton:hover,
+.myClass:focus, .myClass:hover{
+    background-color: white;
+    color: blue;    
+    }
+
+.myArticle{
+    font-size: medium;
+    color: blue;
+    background-color: white;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.mySection{
+    font-size: medium;
+    color: blue;
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+    display: inline-block;
+}
+
