@@ -1,1 +1,1 @@
-web: python imgcomp/app.py
+web: gunicorn imgcomp/app.py
