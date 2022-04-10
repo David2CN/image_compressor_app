@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from compressor import do_compression, clear_images
 
 abspath = os.getcwd()
-img_path = "static\images\\"
+img_path = "static/images/"
 UPLOAD_FOLDER = os.path.join(abspath, img_path)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 STORAGE_DURATION_LIMIT = 60 # minutes until created files are start to get deleted
@@ -45,7 +45,7 @@ def upload_file():
             comp_filepath = os.path.join(app.config['UPLOAD_FOLDER'], "compressed_"+filename)
             file.save(filepath)
             img_size, compressed_img_size, compressed_rate = do_compression(filename)
-
+            print(filepath, comp_filepath)
             filepath = "static"+filepath.split("static")[1]
             comp_filepath = "static"+comp_filepath.split("static")[1]
 
