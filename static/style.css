@@ -24,6 +24,7 @@ h1 {
     display: inline-block;
     margin-bottom: 1%;
     margin-top: 1%;
+    width: 100%;
 }
   
 
@@ -53,7 +54,6 @@ h1 {
     display: inline-block;
     margin-bottom: 1%;
     margin-top: 1%;
-
 }
 
 .mySection{

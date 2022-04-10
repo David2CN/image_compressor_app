@@ -1,22 +1,6 @@
 {% extends 'base.html' %}
 
-<body>
-
-<section class="headerSection">
-<h1>Image Compressor</h1>
-</section>
-
-<section class="myArticle">
-  Compress images without losing the details: JPG, PNG, GIF, BMP, TIFF, etc.
-
-    <form method="post" enctype="multipart/form-data">
-      <input type="file" name="file" class="myClass" accept="image/*">
-      <input type="submit" value="Upload Image" class="myButton">
-    </form>
-</section>
-
-
-<section class="mySection">
+<section class="mySection" style="margin-top:1% margin-bottom:1%;">
 	{% block content %}
 
 	<span style="text-align:left; margin-left:10%;"> Original: {{ img_size }} </span>
@@ -37,5 +21,4 @@
 
 </section>
 
-</body>
 
