@@ -1,10 +1,13 @@
 import os
 from flask import Flask, flash, request, redirect, render_template
 from werkzeug.utils import secure_filename
-from compressor import do_compression
+from compressor import do_compression, clear_images
 
-UPLOAD_FOLDER = 'static/images/'
+abspath = os.getcwd()
+img_path = "static\images\\"
+UPLOAD_FOLDER = os.path.join(abspath, img_path)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+STORAGE_DURATION_LIMIT = 60 # minutes until created files are start to get deleted
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -20,6 +23,9 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
+
+        # clear old files from storage
+        clear_images(STORAGE_DURATION_LIMIT)
 
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -38,8 +44,11 @@ def upload_file():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             comp_filepath = os.path.join(app.config['UPLOAD_FOLDER'], "compressed_"+filename)
             file.save(filepath)
-
             img_size, compressed_img_size, compressed_rate = do_compression(filename)
+
+            filepath = "static"+filepath.split("static")[1]
+            comp_filepath = "static"+comp_filepath.split("static")[1]
+            print("HERE: ", filepath, comp_filepath)
 
             return render_template("compression.html",
                                    img_filepath=filepath, compressed_img_filepath=comp_filepath,

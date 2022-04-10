@@ -3,4 +3,5 @@ __pycache__/
 akaza.png
 pytest_cache/
 static/images/
+tester.py
 
