@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, request, redirect, render_template
+from flask import Flask, flash, request, redirect, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 from compressor import do_compression, clear_images
 
@@ -52,9 +52,15 @@ def upload_file():
             return render_template("compression.html",
                                    img_filepath=filepath, compressed_img_filepath=comp_filepath,
                                    img_size=img_size, compressed_img_size=compressed_img_size,
-                                   compressed_rate=compressed_rate)
+                                   compressed_rate=compressed_rate,
+                                   file_name=filename)
 
     return render_template("base.html")
+
+
+@app.route('/download', methods=['GET', 'POST'])
+def download_file(file_name):
+    return send_from_directory(app.config["UPLOAD_FOLDER"], file_name, as_attachment=True)
 
 
 if __name__ == "__main__":

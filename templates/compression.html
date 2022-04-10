@@ -1,24 +1,35 @@
 {% extends 'base.html' %}
 
-<section class="mySection" style="margin-top:1% margin-bottom:1%;">
-	{% block content %}
+{% block content %}
+	<form method="get" action="/download">
+	  <input type="submit" value="Download Compressed Image" class="downloadButton" style="font-size: 1em;
+																							color: white;
+																							background-color: blue;
+																							border-radius: 10px;
+																							border-color: white;
+																							display: inline-block;
+																							margin-bottom: 1%;
+																							margin-top: 1%;
+																:hover{background-color: white; color: blue;};">
+	</form>
 
 	<span style="text-align:left; margin-left:10%;"> Original: {{ img_size }} </span>
 	<span style="text-align:right; margin-right:10%;"> Compressed: {{ compressed_img_size }} ({{ compressed_rate }}%)</span>
 
-<div class=row>
-	<div class=column>
-		<img src= {{ img_filepath }} width=50% height=50% style=float:left />
-	</div>
+	<div class=row>
+		<div class=column>
+			<img src= {{ img_filepath }} width=50% height=50% style=float:left />
+		</div>
 
-	<div class=column>
-		<img src= {{ compressed_img_filepath }} width=50% height=50% style=float:left/>
+		<div class=column>
+			<img src= {{ compressed_img_filepath }} width=50% height=50% style=float:left/>
+		</div>
+	<p style=clear:both></p>
 	</div>
-<p style=clear:both></p>
-</div>
 
 {% endblock %}
 
-</section>
+
+
 
 
