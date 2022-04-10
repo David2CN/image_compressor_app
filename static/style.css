@@ -24,8 +24,6 @@ h1 {
     display: inline-block;
     margin-bottom: 1%;
     margin-top: 1%;
-    width: 100%;
-    display: inline-block;
 }
   
 
@@ -53,6 +51,9 @@ h1 {
     background-color: white;
     border-radius: 10px;
     display: inline-block;
+    margin-bottom: 1%;
+    margin-top: 1%;
+
 }
 
 .mySection{
@@ -62,5 +63,7 @@ h1 {
     border-radius: 10px;
     width: 100%;
     display: inline-block;
+    margin-bottom: 1%;
+    margin-top: 1%;
 }
 
