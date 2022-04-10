@@ -25,7 +25,7 @@ def upload_file():
     if request.method == 'POST':
 
         # clear old files from storage
-        clear_images(STORAGE_DURATION_LIMIT)
+        #clear_images(STORAGE_DURATION_LIMIT)
 
         # check if the post request has the file part
         if 'file' not in request.files:

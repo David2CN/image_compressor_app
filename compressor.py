@@ -94,10 +94,11 @@ def merge(img1, img2):
 def clear_images(limit=5):
     """To delete images that have exceeded storage time
     """
-    files = os.listdir(IMG_PATH)
-    for file in files:
-        filepath = os.path.join(IMG_PATH, file)
-        try:
+    try:
+        files = os.listdir(IMG_PATH)
+        print(files)
+        for file in files:
+            filepath = os.path.join(IMG_PATH, file)
             time_created = os.path.getctime(filepath)
             now = time.time()
             duration = now - time_created
@@ -105,5 +106,5 @@ def clear_images(limit=5):
                 #delete file
                 os.remove(filepath)
                 print("Storage cleared!")
-        except:
-            pass
+    except:
+        pass
