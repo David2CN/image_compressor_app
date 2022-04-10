@@ -1,4 +1,6 @@
 __pycache__/
 .idea/
 akaza.png
+pytest_cache/
+static/images/
 

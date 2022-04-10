@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from compressor import do_compression
 
 UPLOAD_FOLDER = 'static/images/'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -47,3 +47,7 @@ def upload_file():
                                    compressed_rate=compressed_rate)
 
     return render_template("base.html")
+
+
+if __name__ == "__main__":
+    app.run()
