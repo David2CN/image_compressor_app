@@ -48,7 +48,6 @@ def upload_file():
 
             filepath = "static"+filepath.split("static")[1]
             comp_filepath = "static"+comp_filepath.split("static")[1]
-            print("HERE: ", filepath, comp_filepath)
 
             return render_template("compression.html",
                                    img_filepath=filepath, compressed_img_filepath=comp_filepath,
