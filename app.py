@@ -25,8 +25,8 @@ def upload_file():
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
-        file = request.files['file']
 
+        file = request.files['file']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
@@ -37,9 +37,10 @@ def upload_file():
             filename = secure_filename(file.filename)
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             comp_filepath = os.path.join(app.config['UPLOAD_FOLDER'], "compressed_"+filename)
-
             file.save(filepath)
+
             img_size, compressed_img_size, compressed_rate = do_compression(filename)
+
             return render_template("compression.html",
                                    img_filepath=filepath, compressed_img_filepath=comp_filepath,
                                    img_size=img_size, compressed_img_size=compressed_img_size,
