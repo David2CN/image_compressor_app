@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from compressor import do_compression, clear_images
 
 abspath = os.getcwd()
-img_path = "static/images/"
+img_path = "static/"
 UPLOAD_FOLDER = os.path.join(abspath, img_path)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 STORAGE_DURATION_LIMIT = 60 # minutes until created files are start to get deleted

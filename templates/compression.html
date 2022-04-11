@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+	<!--
 	<form method="get" action="/download">
 	  <input type="submit" value="Download Compressed Image" class="downloadButton" style="font-size: 1em;
 																							color: white;
@@ -12,6 +13,7 @@
 																							margin-top: 1%;
 																:hover{background-color: white; color: blue;};">
 	</form>
+	-->
 
 	<span style="text-align:left; margin-left:10%;"> Original: {{ img_size }} </span>
 	<span style="text-align:right; margin-right:10%;"> Compressed: {{ compressed_img_size }} ({{ compressed_rate }}%)</span>
@@ -28,7 +30,6 @@
 	</div>
 
 {% endblock %}
-
 
 
 
