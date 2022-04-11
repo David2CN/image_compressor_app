@@ -7,7 +7,7 @@ abspath = os.getcwd()
 img_path = "static/images/"
 UPLOAD_FOLDER = os.path.join(abspath, img_path)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-STORAGE_DURATION_LIMIT = 60 # minutes until created files are start to get deleted
+STORAGE_DURATION_LIMIT = 5   # minutes until created files are start to get deleted
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -25,7 +25,7 @@ def upload_file():
     if request.method == 'POST':
 
         # clear old files from storage
-        # clear_images(STORAGE_DURATION_LIMIT)
+        clear_images(STORAGE_DURATION_LIMIT)
 
         # check if the post request has the file part
         if 'file' not in request.files:

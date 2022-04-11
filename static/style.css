@@ -16,7 +16,7 @@ h1 {
 }
    
 
-section.headerSection{
+.headerSection{
     font-size: large;
     font-weight: bold;
     color: blue;

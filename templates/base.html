@@ -2,18 +2,20 @@
 <html>
 
 <head>
-    <title>{% block title %}{% endblock %}Image Compressor</title>
+    <title>Image Compressor</title>
     <meta charset="utf-8" />
-    <link rel="icon" href="static/favicon.ico" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block title %}
+    {% endblock %}
 </head>
 
 <body>
 
 <section class="headerSection">
-           <img src="static/logo.png" width="20px" height="20px"/>
+           <img src="{{ url_for('static', filename='logo.png') }}" width="20px" height="20px"/>
     <!-- <h1>Image Compressor</h1> --> <b> Image Compressor </b>
 </section>
 

@@ -1,17 +1,31 @@
 {% extends 'base.html' %}
 
+<head>
+	{% block title %}
+	<style>
+		.downloadButton {
+			font-size: 1em;
+			color: white;
+			background-color: blue;
+			border-radius: 10px;
+			border-color: white;
+			display: inline-block;
+			margin-bottom: 1%;
+			margin-top: 1%;
+			}
+
+		.downloadButton:focus, .downloadButton:hover {
+			background-color: white;
+			color: blue;
+			}
+	</style>
+	{% endblock %}
+</head>
+
 {% block content %}
 
 	<form method="get" action="/static/images/{{ file_name }}">
-	  <input type="submit" value="Download Compressed Image" class="downloadButton" style="font-size: 1em;
-																							color: white;
-																							background-color: blue;
-																							border-radius: 10px;
-																							border-color: white;
-																							display: inline-block;
-																							margin-bottom: 1%;
-																							margin-top: 1%;
-																:hover{background-color: white; color: blue;};">
+	  <input type="submit" value="Download Compressed Image" class="downloadButton">
 	</form>
 	<!-- -->
 
