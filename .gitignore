@@ -5,5 +5,4 @@ static/images/*
 !static/images/favicon.ico
 !static/images/logo.png
 tester.py
-
-
+compressed.jpg

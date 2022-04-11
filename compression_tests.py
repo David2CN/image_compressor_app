@@ -2,7 +2,8 @@ import pytest
 
 from compressor import do_compression, read_image, compress, get_size_units
 
-img_path = "static/images/akaza.png"
+img_path = "static/images/logo.png"
+img_name = "logo.png"
 
 
 def test_read_image():
@@ -22,7 +23,7 @@ def test_get_size_units():
 
 
 def test_do_compression():
-    assert len(do_compression("akaza.png")) == 3
-    assert type(do_compression("akaza.png")[0]), str
-    assert type(do_compression("akaza.png")[1]), str
-    assert type(do_compression("akaza.png")[2]), int
+    assert len(do_compression(img_name)) == 3
+    assert type(do_compression(img_name)[0]), str
+    assert type(do_compression(img_name)[1]), str
+    assert type(do_compression(img_name)[2]), int
