@@ -2,7 +2,7 @@ __pycache__/
 .idea/
 pytest_cache/
 static/images/*
-!static/images/favicon.ico
+!static/images/logo.ico
 !static/images/logo.png
 tester.py
 compressed.jpg
