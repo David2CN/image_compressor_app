@@ -16,12 +16,12 @@ h1 {
 }
    
 
-.headerSection {
-    font-size: medium;
+section.headerSection{
+    font-size: large;
+    font-weight: bold;
     color: blue;
     background-color: white;
     border-radius: 10px;
-    display: inline-block;
     margin-bottom: 1%;
     margin-top: 1%;
     width: 100%;

@@ -1,7 +1,9 @@
 __pycache__/
 .idea/
-akaza.png
 pytest_cache/
-static/images/
+static/images/*
+!static/images/favicon.ico
+!static/images/logo.png
 tester.py
+
 

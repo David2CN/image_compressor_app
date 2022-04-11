@@ -4,7 +4,7 @@ from PIL import Image
 
 
 abspath = os.getcwd()
-directory = "static/"
+directory = "static/images/"
 IMG_PATH = os.path.join(abspath, directory)
 
 
@@ -27,7 +27,7 @@ def get_paths(filename, images_path=IMG_PATH):
 
 def get_size_units(img_size):
     # To get uncompressed size in kb or mb
-    img_size /= 1024 # first convert to KB
+    img_size /= 1024  # first convert to KB
     img_size_unit = "kb"
     if img_size >= 1024:
         img_size /= 1024
@@ -96,15 +96,17 @@ def clear_images(limit=5):
     """
     try:
         files = os.listdir(IMG_PATH)
-        print(files)
         for file in files:
-            filepath = os.path.join(IMG_PATH, file)
-            time_created = os.path.getctime(filepath)
-            now = time.time()
-            duration = now - time_created
-            if duration >= limit*60:
-                #delete file
-                os.remove(filepath)
-                print("Storage cleared!")
+            if file not in ["favicon.ico", "logo.png"]:
+                filepath = os.path.join(IMG_PATH, file)
+                time_created = os.path.getctime(filepath)
+                now = time.time()
+                duration = now - time_created
+                if duration >= limit*60:
+                    # delete file
+                    os.remove(filepath)
+                    print("Storage cleared!")
+    except FileNotFoundError:
+        pass
     except:
         pass

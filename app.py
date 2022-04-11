@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from compressor import do_compression, clear_images
 
 abspath = os.getcwd()
-img_path = "static/"
+img_path = "static/images/"
 UPLOAD_FOLDER = os.path.join(abspath, img_path)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 STORAGE_DURATION_LIMIT = 60 # minutes until created files are start to get deleted
@@ -25,7 +25,7 @@ def upload_file():
     if request.method == 'POST':
 
         # clear old files from storage
-        #clear_images(STORAGE_DURATION_LIMIT)
+        # clear_images(STORAGE_DURATION_LIMIT)
 
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -53,12 +53,12 @@ def upload_file():
                                    img_filepath=filepath, compressed_img_filepath=comp_filepath,
                                    img_size=img_size, compressed_img_size=compressed_img_size,
                                    compressed_rate=compressed_rate,
-                                   file_name=filename)
+                                   file_name="compressed_"+filename)
 
     return render_template("base.html")
 
 
-@app.route('/download', methods=['GET', 'POST'])
+@app.route('/static/images/<file_name>', methods=['GET', 'POST'])
 def download_file(file_name):
     return send_from_directory(app.config["UPLOAD_FOLDER"], file_name, as_attachment=True)
 
