@@ -97,7 +97,7 @@ def clear_images(limit=5):
     try:
         files = os.listdir(IMG_PATH)
         for file in files:
-            if file not in ["favicon.ico", "logo.png"]:
+            if file not in ["logo.ico", "logo.png"]:
                 filepath = os.path.join(IMG_PATH, file)
                 time_created = os.path.getctime(filepath)
                 now = time.time()
