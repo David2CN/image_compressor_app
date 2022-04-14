@@ -42,16 +42,22 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            comp_filepath = os.path.join(app.config['UPLOAD_FOLDER'], "compressed_"+filename)
             file.save(filepath)
+
+            comp_filepath = os.path.join(app.config['UPLOAD_FOLDER'], "compressed_"+filename)
             img_size, compressed_img_size, compressed_rate = do_compression(filename)
-            print(filepath, comp_filepath)
+
+            # get filepaths starting from the static directory
+            # for both original and compressed image because
+            # HTML templates seem to require it to get the correct url
             filepath = "static"+filepath.split("static")[1]
             comp_filepath = "static"+comp_filepath.split("static")[1]
 
             return render_template("compression.html",
-                                   img_filepath=filepath, compressed_img_filepath=comp_filepath,
-                                   img_size=img_size, compressed_img_size=compressed_img_size,
+                                   img_filepath=filepath,
+                                   compressed_img_filepath=comp_filepath,
+                                   img_size=img_size,
+                                   compressed_img_size=compressed_img_size,
                                    compressed_rate=compressed_rate,
                                    file_name="compressed_"+filename)
 
