@@ -4,7 +4,7 @@ from PIL import Image
 
 
 abspath = os.getcwd()
-directory = "static/images/"
+directory = "imgcomp/static/images/"
 IMG_PATH = os.path.join(abspath, directory)
 
 

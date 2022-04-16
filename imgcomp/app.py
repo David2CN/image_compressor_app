@@ -1,10 +1,10 @@
 import os
 from flask import Flask, flash, request, redirect, render_template, send_from_directory, url_for
 from werkzeug.utils import secure_filename
-from imgcomp.compressor import do_compression, clear_images, get_resolution
+from compressor import do_compression, clear_images, get_resolution
 
 abspath = os.getcwd()
-img_path = "static/images/"
+img_path = "imgcomp/static/images/"
 UPLOAD_FOLDER = os.path.join(abspath, img_path)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 STORAGE_DURATION_LIMIT = 5   # minutes until created files are start to get deleted
@@ -46,13 +46,15 @@ def upload_file():
 
             compressed_img_filepath = os.path.join(app.config['UPLOAD_FOLDER'], "compressed_"+filename)
             img_size, compressed_img_size, compressed_rate = do_compression(filename)
+            img_resolution = get_resolution(img_filepath)
 
             # get filepaths starting from the static directory
             # for both original and compressed image because
             # HTML templates seem to require it to get the correct url
             img_filepath = "static"+img_filepath.split("static")[1]
             compressed_img_filepath = "static"+compressed_img_filepath.split("static")[1]
-            img_resolution = get_resolution(img_filepath)
+            print(img_filepath)
+            print(compressed_img_filepath)
 
             return render_template("compression.html",
                                    img_filepath=img_filepath,
@@ -66,7 +68,7 @@ def upload_file():
     return render_template("index.html")
 
 
-@app.route('/static/images/<file_name>', methods=['GET', 'POST'])
+@app.route('/imgcomp/static/images/<file_name>', methods=['GET', 'POST'])
 def download_file(file_name):
     return send_from_directory(app.config["UPLOAD_FOLDER"], file_name, as_attachment=True)
 
