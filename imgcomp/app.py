@@ -1,7 +1,7 @@
 import os
 from flask import Flask, flash, request, redirect, render_template, send_from_directory, url_for
 from werkzeug.utils import secure_filename
-from compressor import do_compression, clear_images, get_resolution
+from imgcomp.compressor import do_compression, clear_images, get_resolution
 
 abspath = os.getcwd()
 img_path = "imgcomp/static/images/"
@@ -72,6 +72,3 @@ def upload_file():
 def download_file(file_name):
     return send_from_directory(app.config["UPLOAD_FOLDER"], file_name, as_attachment=True)
 
-
-if __name__ == "__main__":
-    app.run()
