@@ -1,1 +1,1 @@
-web: gunicorn imgcomp:app
+web: gunicorn wsgi:app

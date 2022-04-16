@@ -27,18 +27,19 @@
 {% block content %}
 <div class="container-fluid" id="datacon">
 	<div class="container" id="progresscon">
-		<p>Reduced Size: {{ compressed_img_size }} <span style="text-decoration:line-through;font-size:0.8em;font-weight:bold;">{{ img_size }}</span></p>
+	<h6>Compressed Image</h6>
+		<p>Reduced Size: <strong>{{ compressed_img_size }} <span style="text-decoration:line-through;font-size:0.7em;">{{ img_size }}</span></strong></p>
 
 		<div class="progress">
 	  		<div class="progress-bar" style="width:{{ compressed_rate }}%">{{ compressed_rate }}%</div>
 		</div>
 
-		<p>Resolution: <s>{{ img_resolution }}</s></p>
+		<p>Resolution: <strong>{{ img_resolution }}</strong></p>
 	</div>
 
 	<div class="container-fluid" id="buttoncon" style="margin:auto;">
 		<form method="get" action="/imgcomp/static/images/{{ compressed_file_name }}">
-			<button type="submit" class="btn btn-primary" style="white-space:normal;">Download Compressed Image</button>
+			<button type="submit" class="btn btn-primary" style="white-space:normal;">Download</button>
 		</form>
 	</div>
 </div>
