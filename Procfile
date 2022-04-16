@@ -1,1 +1,1 @@
-web: gunicorn imgcomp:create_app
+web: gunicorn imgcomp

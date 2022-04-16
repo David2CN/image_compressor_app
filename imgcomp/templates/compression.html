@@ -1,22 +1,42 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<div class="container-fluid" style="display:block;width:25%;float:left;">
-	<div class="container" id="con2">
-		<h5>Compression</h5>
-		<br>
+    {% block head %}
+        <style>
+        	#datacon{
+            background-color:LightGray;
+            display:block;
+            margin-bottom:2%;
+            width:60%;
+            height:20%;
+            text-align:center;
+            border-radius:1%;
+            }
 
-		<h5>Reduced Size: {{ compressed_img_size }} <span style="text-decoration:line-through;font-size:0.8em;">{{ img_size }}</span></h5>
+        	#imagecon{
+            display:block;
+            }
+
+            #buttoncon{
+			  display: block;
+			  margin-left: auto;
+			  margin-right: auto;
+  			}
+	</style>
+    {% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="datacon">
+	<div class="container" id="progresscon">
+		<p>Reduced Size: {{ compressed_img_size }} <span style="text-decoration:line-through;font-size:0.8em;font-weight:bold;">{{ img_size }}</span></p>
 
 		<div class="progress">
 	  		<div class="progress-bar" style="width:{{ compressed_rate }}%">{{ compressed_rate }}%</div>
 		</div>
 
-		<h5>Resolution: {{ img_resolution }}</h5>
+		<p>Resolution: <s>{{ img_resolution }}</s></p>
 	</div>
 
-	<br>
-	<div class="container-fluid" id="con3" style="margin-top:5%;">
+	<div class="container-fluid" id="buttoncon" style="margin:auto;">
 		<form method="get" action="/imgcomp/static/images/{{ compressed_file_name }}">
 			<button type="submit" class="btn btn-primary" style="white-space:normal;">Download Compressed Image</button>
 		</form>
@@ -25,15 +45,12 @@
 
 
 
-<div class="container-fluid" id="con1" style="width:75%;float:right;">
+<div class="container-fluid" id="imagecon">
 	<div class="jumbotron" id="jumbo1">
 	  <img src= {{ img_filepath }} width=50% height=50% class="rounded float-left"/>
 	  <img src= {{ compressed_img_filepath }} width=50% height=50% class="rounded float-left"/>
-	  <p style="clear:both;"></p>
-
+		  <p style="clear:both;"></p>
 	</div>
 </div>
-
-	  <p style="clear:both;"></p>
 {% endblock %}
 
