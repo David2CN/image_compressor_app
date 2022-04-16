@@ -1,8 +1,8 @@
-__pycache__/
+imgcomp/__pycache__/
 .idea/
-pytest_cache/
-static/images/*
-!static/images/logo.ico
-!static/images/logo.png
-tester.py
-compressed.jpg
+imgcomp/pytest_cache/
+imgcomp/static/images/*
+!imgcomp/static/images/logo.ico
+!imgcomp/static/images/logo.png
+imgcomp/tester.py
+imgcomp/compressed.jpg

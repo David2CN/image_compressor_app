@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+    {% block head %}
+        <style>
+        .jumbotron{
+            text-align:center;
+            color:black;
+            }
+	</style>
+    {% endblock %}
+
+<body>
+    {% block content %}
+    <div class="continer">
+        <div class="jumbotron">
+            <p>Compress images without losing the details, acceptable formats include: JPG, PNG, JPEG.</p>
+
+            <form method="post" enctype="multipart/form-data">
+              <input type="file" name="file" class="myClass" accept="image/*">
+              <input type="submit" value="Upload Image" class="myButton">
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+</body>

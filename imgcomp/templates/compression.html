@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid" style="display:block;width:25%;float:left;">
+	<div class="container" id="con2">
+		<h5>Compression</h5>
+		<br>
+
+		<h5>Reduced Size: {{ compressed_img_size }} <span style="text-decoration:line-through;font-size:0.8em;">{{ img_size }}</span></h5>
+
+		<div class="progress">
+	  		<div class="progress-bar" style="width:{{ compressed_rate }}%">{{ compressed_rate }}%</div>
+		</div>
+
+		<h5>Resolution: {{ img_resolution }}</h5>
+	</div>
+
+	<br>
+	<div class="container-fluid" id="con3" style="margin-top:5%;">
+		<form method="get" action="/static/images/{{ compressed_file_name }}">
+			<button type="submit" class="btn btn-primary" style="white-space:normal;">Download Compressed Image</button>
+		</form>
+	</div>
+</div>
+
+
+
+<div class="container-fluid" id="con1" style="width:75%;float:right;">
+	<div class="jumbotron" id="jumbo1">
+	  <img src= {{ img_filepath }} width=50% height=50% class="rounded float-left"/>
+	  <img src= {{ compressed_img_filepath }} width=50% height=50% class="rounded float-left"/>
+	  <p style="clear:both;"></p>
+
+	</div>
+</div>
+
+	  <p style="clear:both;"></p>
+{% endblock %}
+
