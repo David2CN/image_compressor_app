@@ -45,16 +45,16 @@ def compress(img, compressed_img_path=directory+"compressed.jpg"):
     extension = img.format
 
     if extension == "PNG":
-        img.save(compressed_img_path, "PNG", quality=10)
+        img.save(compressed_img_path, "PNG", optimize=True, quality=10)
 
     elif extension == "JPEG":
-        img.save(compressed_img_path, "JPEG", quality=50)
+        img.save(compressed_img_path, "JPEG", optimize=True, quality=50)
 
     elif extension == "GIF":
-        img.save(compressed_img_path, "GIF", quality=50)
+        img.save(compressed_img_path, "GIF", optimize=True, quality=50)
 
     else:
-        img.save(compressed_img_path, "JPEG", quality=50)
+        img.save(compressed_img_path, "JPEG", optimize=True, quality=50)
 
     compressed_img = read_image(compressed_img_path)
     return compressed_img

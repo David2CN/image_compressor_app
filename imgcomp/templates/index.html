@@ -11,6 +11,17 @@
 
 <body>
     {% block content %}
+
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align:center;width:80%;margin:auto;">
+        <button type="button" class="fade close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{message}}
+    </div>
+    {% endfor %}
+
+
     <div class="container">
         <div class="jumbotron">
             <p>Compress images without losing the details, acceptable formats include: JPG, PNG, JPEG.</p>

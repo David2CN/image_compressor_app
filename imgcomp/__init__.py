@@ -35,10 +35,11 @@ def create_app():
                 return redirect(request.url)
 
             file = request.files['file']
+
             # If the user does not select a file, the browser submits an
             # empty file without a filename.
             if file.filename == '':
-                flash('No selected file')
+                flash('No selected file!s')
                 return redirect(request.url)
 
             if file and allowed_file(file.filename):
@@ -55,8 +56,6 @@ def create_app():
                 # HTML templates seem to require it to get the correct url
                 img_filepath = "static"+img_filepath.split("static")[1]
                 compressed_img_filepath = "static"+compressed_img_filepath.split("static")[1]
-                print(img_filepath)
-                print(compressed_img_filepath)
 
                 return render_template("compression.html",
                                        img_filepath=img_filepath,

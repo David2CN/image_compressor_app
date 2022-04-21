@@ -30,8 +30,8 @@
 	<h6>Compressed Image</h6>
 		<p>Reduced Size: <strong>{{ compressed_img_size }} <span style="text-decoration:line-through;font-size:0.7em;">{{ img_size }}</span></strong></p>
 
-		<div class="progress">
-	  		<div class="progress-bar" style="width:{{ compressed_rate }}%">{{ compressed_rate }}%</div>
+		<div class="progress" style="font-size:1.2em;height:1.2em;">
+			<div class="progress-bar" style="width:{{ compressed_rate }}%;color:black;">Reduction: {{ compressed_rate }}%</div>
 		</div>
 
 		<p>Resolution: <strong>{{ img_resolution }}</strong></p>
@@ -43,7 +43,6 @@
 		</form>
 	</div>
 </div>
-
 
 
 <div class="container-fluid" id="imagecon">
