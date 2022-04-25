@@ -28,29 +28,29 @@
 <div class="container-fluid" id="datacon">
 	<div class="container" id="progresscon">
 	<h6>Compressed Image</h6>
-		<p>Reduced Size: <strong>{{ compressed_img_size }} <span style="text-decoration:line-through;font-size:0.7em;">{{ img_size }}</span></strong></p>
+		<p>Reduced Size: <strong>{{ uploads["compressed_img_size"] }} <span style="text-decoration:line-through;font-size:0.7em;">{{ uploads["img_size"] }}</span></strong></p>
 
-		<div class="progress" style="font-size:1.2em;height:1.2em;">
-			<div class="progress-bar" style="width:{{ compressed_rate }}%;color:black;">Reduction: {{ compressed_rate }}%</div>
+		<div class="progress" style="font-size:1em;height:1em;">
+			<div class="progress-bar" style="width:{{ uploads['compressed_rate'] }}%;color:black;">Reduction: {{ uploads["compressed_rate"] }}%</div>
 		</div>
 
-		<p>Resolution: <strong>{{ img_resolution }}</strong></p>
+		<p>Resolution: <strong>{{ uploads["img_resolution"] }}</strong></p>
 	</div>
 
 	<div class="container-fluid" id="buttoncon" style="margin:auto;">
-		<form method="get" action="/imgcomp/static/images/{{ compressed_file_name }}">
+		<form method="get" action="/imgcomp/{{ url_for('static', filename='images/compressed_'+uploads['img_name']) }}">
 			<button type="submit" class="btn btn-primary" style="white-space:normal;">Download</button>
 		</form>
 	</div>
 </div>
 
-
 <div class="container-fluid" id="imagecon">
 	<div class="jumbotron" id="jumbo1">
-	  <img src= {{ img_filepath }} width=50% height=50% class="rounded float-left"/>
-	  <img src= {{ compressed_img_filepath }} width=50% height=50% class="rounded float-left"/>
+	  <img src= "{{ url_for('static', filename='images/'+uploads['img_name']) }}" width=50% height=50% class="rounded float-left"/>
+	  <img src= "{{ url_for('static', filename='images/compressed_'+uploads['img_name']) }}" width=50% height=50% class="rounded float-left"/>
 		  <p style="clear:both;"></p>
 	</div>
 </div>
+
 {% endblock %}
 

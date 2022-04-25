@@ -1,18 +1,36 @@
 import os
-from flask import Flask, flash, request, redirect, render_template, send_from_directory, url_for
+from flask import Flask, flash, request, redirect, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 from imgcomp.compressor import do_compression, clear_images, get_resolution
+from flask_wtf import FlaskForm
+from wtforms import SubmitField
+from flask_wtf.file import FileField, FileAllowed
 
 abspath = os.getcwd()
 img_path = "imgcomp/static/images/"
 UPLOAD_FOLDER = os.path.join(abspath, img_path)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-STORAGE_DURATION_LIMIT = 5   # minutes until created files are start to get deleted
+STORAGE_DURATION_LIMIT = 1   # minutes until created files are start to get deleted
 
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+class UploadForm(FlaskForm):
+    picture = FileField("", validators=[FileAllowed(["jpg", "png", "jpeg"])])
+    submit = SubmitField("Compress")
+
+
+def get_image_details(picture, app, form):
+    filename = secure_filename(picture.filename)
+    img_filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    form.picture.data.save(img_filepath)
+
+    img_size, compressed_img_size, compressed_rate = do_compression(filename)
+    img_resolution = get_resolution(img_filepath)
+
+    return {"img_name": filename,
+            "img_size": img_size,
+            "compressed_img_size": compressed_img_size,
+            "compressed_rate": compressed_rate,
+            "img_resolution": img_resolution}
 
 
 def create_app():
@@ -21,56 +39,38 @@ def create_app():
     secret_key = "abd564"
     app.config['SECRET_KEY'] = secret_key
 
-
     @app.route('/', methods=['GET', 'POST'])
     def upload_file():
-        if request.method == 'POST':
+
+        form = UploadForm()
+
+        if form.validate_on_submit():
 
             # clear old files from storage
             clear_images(STORAGE_DURATION_LIMIT)
 
-            # check if the post request has the file part
-            if 'file' not in request.files:
-                flash('No file part')
+            # flash a message if no file is selected
+            if not form.picture.data:
+                flash('No selected files!')
                 return redirect(request.url)
 
-            file = request.files['file']
+            if form.picture.data:
+                uploads = get_image_details(form.picture.data, app, form)
 
-            # If the user does not select a file, the browser submits an
-            # empty file without a filename.
-            if file.filename == '':
-                flash('No selected file!s')
-                return redirect(request.url)
+                return render_template("compression.html", uploads=uploads)
 
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                img_filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                file.save(img_filepath)
-
-                compressed_img_filepath = os.path.join(app.config['UPLOAD_FOLDER'], "compressed_"+filename)
-                img_size, compressed_img_size, compressed_rate = do_compression(filename)
-                img_resolution = get_resolution(img_filepath)
-
-                # get filepaths starting from the static directory
-                # for both original and compressed image because
-                # HTML templates seem to require it to get the correct url
-                img_filepath = "static"+img_filepath.split("static")[1]
-                compressed_img_filepath = "static"+compressed_img_filepath.split("static")[1]
-
-                return render_template("compression.html",
-                                       img_filepath=img_filepath,
-                                       compressed_img_filepath=compressed_img_filepath,
-                                       img_size=img_size,
-                                       compressed_img_size=compressed_img_size,
-                                       compressed_rate=compressed_rate,
-                                       compressed_file_name="compressed_"+filename,
-                                       img_resolution=img_resolution)
-
-        return render_template("index.html")
-
+        return render_template("index.html", form=form)
 
     @app.route('/imgcomp/static/images/<file_name>', methods=['GET', 'POST'])
     def download_file(file_name):
         return send_from_directory(app.config["UPLOAD_FOLDER"], file_name, as_attachment=True)
+
+    @app.errorhandler(404)
+    def error_404(error):
+        return render_template("404.html"), 404
+
+    @app.errorhandler(503)
+    def error_503(error):
+        return render_template("503.html"), 503
 
     return app

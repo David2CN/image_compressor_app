@@ -13,6 +13,7 @@ def read_image(img_path):
     """
     try:
         img = Image.open(img_path)
+
     except OSError:
         return "Invalid file type!, valid file types include:\
 .jpg, .png, .jpeg, .gif, etc"
@@ -45,16 +46,11 @@ def compress(img, compressed_img_path=directory+"compressed.jpg"):
     extension = img.format
 
     if extension == "PNG":
-        img.save(compressed_img_path, "PNG", optimize=True, quality=10)
+        img = img.convert("P", palette=Image.ADAPTIVE, colors=256)
+        img.save(compressed_img_path, "PNG", optimize=True)
 
     elif extension == "JPEG":
-        img.save(compressed_img_path, "JPEG", optimize=True, quality=50)
-
-    elif extension == "GIF":
-        img.save(compressed_img_path, "GIF", optimize=True, quality=50)
-
-    else:
-        img.save(compressed_img_path, "JPEG", optimize=True, quality=50)
+        img.save(compressed_img_path, "JPEG", quality=60)
 
     compressed_img = read_image(compressed_img_path)
     return compressed_img
@@ -85,18 +81,6 @@ def do_compression(filename):
 def get_resolution(image_filepath):
     img_res = read_image(image_filepath).size
     return f"{img_res[0]}x{img_res[1]}"
-
-
-def merge(img1, img2):
-    w = img1.size[0] + img2.size[0]
-    h = max(img1.size[1], img2.size[1])
-
-    merged_image = Image.new("RGBA", (w, h))
-
-    merged_image.paste(img1)
-    merged_image.paste(img2, (img1.size[0], 0))
-
-    return merged_image
 
 
 def clear_images(limit=5):
