@@ -1,5 +1,5 @@
-flask~=1.1.2
+flask~=2.1.1
 werkzeug~=2.0.2
 wtforms~=3.0.1
-pillow~=8.4.0
+pillow~=9.1.0
 setuptools~=58.0.4
