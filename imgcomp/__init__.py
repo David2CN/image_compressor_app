@@ -9,18 +9,12 @@ from flask_wtf.file import FileField, FileAllowed
 abspath = os.getcwd()
 img_path = "imgcomp/static/images/"
 UPLOAD_FOLDER = os.path.join(abspath, img_path)
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 STORAGE_DURATION_LIMIT = 60   # minutes until created files start to get deleted
-
+ALLOWED_FORMATS = ['png', 'jpg', 'jpeg']
 
 class UploadForm(FlaskForm):
-    picture = FileField("", validators=[FileAllowed(["jpg", "png", "jpeg"])])
+    picture = FileField("", validators=[FileAllowed(ALLOWED_FORMATS)])
     submit = SubmitField("Compress")
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def get_image_details(picture, app, form):
