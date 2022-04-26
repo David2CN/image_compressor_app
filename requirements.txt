@@ -4,3 +4,4 @@ wtforms~=3.0.1
 pillow~=9.1.0
 setuptools~=58.0.4
 flask-wtf~=1.0.1
+gunicorn
