@@ -10,12 +10,17 @@ abspath = os.getcwd()
 img_path = "imgcomp/static/images/"
 UPLOAD_FOLDER = os.path.join(abspath, img_path)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-STORAGE_DURATION_LIMIT = 1   # minutes until created files are start to get deleted
+STORAGE_DURATION_LIMIT = 60   # minutes until created files start to get deleted
 
 
 class UploadForm(FlaskForm):
     picture = FileField("", validators=[FileAllowed(["jpg", "png", "jpeg"])])
     submit = SubmitField("Compress")
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def get_image_details(picture, app, form):
@@ -44,6 +49,12 @@ def create_app():
 
         form = UploadForm()
 
+        if request.method == "POST":
+            if not form.validate_on_submit():
+                # flash a message for invalid files!
+                flash('Invalid file!\nValid files include: JPG, PNG.')
+                print("Invalid File")
+
         if form.validate_on_submit():
 
             # clear old files from storage
@@ -51,12 +62,11 @@ def create_app():
 
             # flash a message if no file is selected
             if not form.picture.data:
-                flash('No selected files!')
+                flash('Select a file!')
                 return redirect(request.url)
 
             if form.picture.data:
                 uploads = get_image_details(form.picture.data, app, form)
-
                 return render_template("compression.html", uploads=uploads)
 
         return render_template("index.html", form=form)

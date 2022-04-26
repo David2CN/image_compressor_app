@@ -18,6 +18,9 @@ def read_image(img_path):
         return "Invalid file type!, valid file types include:\
 .jpg, .png, .jpeg, .gif, etc"
 
+    except Exception as e:
+        return f"Error: {e}"
+
     return img
 
 
@@ -80,6 +83,7 @@ def do_compression(filename):
 
 def get_resolution(image_filepath):
     img_res = read_image(image_filepath).size
+
     return f"{img_res[0]}x{img_res[1]}"
 
 
@@ -101,7 +105,7 @@ def clear_images(limit=5):
                     os.remove(filepath)
 
                     print("Storage cleared!")
-    except FileNotFoundError:
-        pass
-    except:
-        pass
+    except FileNotFoundError as f:
+        print(f"File Not Found: {f}")
+    except Exception as e:
+        print(f"Error: {e}")
