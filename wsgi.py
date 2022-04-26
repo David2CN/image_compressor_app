@@ -1,3 +1,1 @@
-from imgcomp import create_app
-
-app = create_app()
+from imgcomp.app import app

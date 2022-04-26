@@ -8,5 +8,4 @@ imgcomp/static/images/*
 !imgcomp/static/images/readme.png
 !imgcomp/static/images/readme2.png
 imgcomp/tester.py
-imgcomp/app.py
 imgcomp/compressed.jpg
