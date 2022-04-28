@@ -13,7 +13,7 @@ STORAGE_DURATION_LIMIT = 60   # minutes until created files start to get deleted
 ALLOWED_FORMATS = ['png', 'jpg', 'jpeg']
 
 class UploadForm(FlaskForm):
-    picture = FileField("", validators=[FileAllowed(ALLOWED_FORMATS)])
+    picture = FileField("Drop Your File Here", validators=[FileAllowed(ALLOWED_FORMATS)])
     quality = SelectField(u'Quality Reduction (**only for JPG files!)', choices=[(70, "low"), (40, "medium"), (10, "high")])
     submit = SubmitField("Compress")
 
