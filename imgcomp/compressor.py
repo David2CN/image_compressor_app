@@ -43,7 +43,7 @@ def get_size_units(img_size):
     return f"{img_size: .2f}{img_size_unit}"
 
 
-def compress(img, compressed_img_path=directory+"compressed.jpg"):
+def compress(img, compressed_img_path=directory+"compressed.jpg", quality=60):
     """Compress image.
     """
     extension = img.format
@@ -53,18 +53,18 @@ def compress(img, compressed_img_path=directory+"compressed.jpg"):
         img.save(compressed_img_path, "PNG", optimize=True)
 
     elif extension == "JPEG":
-        img.save(compressed_img_path, "JPEG", quality=60)
+        img.save(compressed_img_path, "JPEG", optimize=True, quality=quality)
 
     compressed_img = read_image(compressed_img_path)
     return compressed_img
 
 
-def do_compression(filename):
+def do_compression(filename, quality=60):
     filepath, compressed_filepath = get_paths(filename)
 
     # read in image, compress and read in compressed image
     img = read_image(filepath)
-    compressed_img = compress(img, compressed_filepath)
+    compressed_img = compress(img, compressed_filepath, quality=quality)
 
     # get compression ratio in bytes
     uncompressed_img_size = os.path.getsize(filepath)

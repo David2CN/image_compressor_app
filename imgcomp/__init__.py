@@ -3,7 +3,7 @@ from flask import Flask, flash, request, redirect, render_template, send_from_di
 from werkzeug.utils import secure_filename
 from imgcomp.compressor import do_compression, clear_images, get_resolution
 from flask_wtf import FlaskForm
-from wtforms import SubmitField
+from wtforms import SubmitField, SelectField
 from flask_wtf.file import FileField, FileAllowed
 
 abspath = os.getcwd()
@@ -14,6 +14,7 @@ ALLOWED_FORMATS = ['png', 'jpg', 'jpeg']
 
 class UploadForm(FlaskForm):
     picture = FileField("", validators=[FileAllowed(ALLOWED_FORMATS)])
+    quality = SelectField(u'Quality Reduction (**only for JPG files!)', choices=[(70, "low"), (40, "medium"), (10, "high")])
     submit = SubmitField("Compress")
 
 
@@ -21,8 +22,9 @@ def get_image_details(picture, app, form):
     filename = secure_filename(picture.filename)
     img_filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     form.picture.data.save(img_filepath)
+    quality = int(form.quality.data)
 
-    img_size, compressed_img_size, compressed_rate = do_compression(filename)
+    img_size, compressed_img_size, compressed_rate = do_compression(filename, quality=quality)
     img_resolution = get_resolution(img_filepath)
 
     return {"img_name": filename,
