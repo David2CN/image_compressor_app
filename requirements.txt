@@ -1,4 +1,4 @@
-flask~=2.1.1
+flask~=2.2.5
 werkzeug>=2.2.3
 wtforms~=3.0.1
 pillow~=9.3.0
